@@ -99,10 +99,10 @@ export default function CultrPoster() {
             {showVideo && (
                 <div className="absolute inset-0 z-30 flex items-center justify-center">
                     {/* Video Container (relative parent) */}
-                    <div className="relative w-[90%] md:w-[80%]">
+                    <div className="relative w-[100%] md:w-[80%]">
 
                         {/* Social Icons (stick to top-right of video) */}
-                        <div className="absolute bottom-20 right-2 bg-black/70 px-2 py-3 rounded-xl flex flex-col items-center gap-3 shadow-lg z-10">
+                        {/* <div className="absolute bottom-20 right-2 bg-black/70 px-2 py-3 rounded-xl flex flex-col items-center gap-3 shadow-lg z-10">
                             <button
                                 onClick={(e) => handleSocialClick(e, "https://www.linkedin.com/in/deveshrohmetra")}
                                 className="hover:scale-110 transition-transform cursor-pointer"
@@ -142,27 +142,27 @@ export default function CultrPoster() {
                                     style={{ width: "auto", height: "auto" }}
                                 />
                             </button>
-                        </div>
+                        </div> */}
 
                         {/* Video Element */}
-                        <div className="">
-                            <video
-                                src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr.mp4"
-                                controls
-                                autoPlay
-                                className="w-full rounded-xl shadow-lg sm:rotate-0 rotate-90"
-                            />
-                        </div>
+
+                        <video
+                            src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr.mp4"
+                            controls
+                            autoPlay
+                            className="w-full rounded-xl shadow-lg sm:rotate-0 rotate-90"
+                        />
+
 
 
                         {/* Close Button */}
-                        <button
+                        {/* <button
                             onClick={handleClose}
                             className="absolute -top-4 -right-4 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-200"
                             aria-label="Close video"
                         >
                             ✕
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             )}
