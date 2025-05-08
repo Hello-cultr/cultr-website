@@ -225,10 +225,12 @@ export default function CultrPoster() {
 
 
                             <video
-                                src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr.mp4"
+                                // src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr.mp4"
+                                src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr+Scale+Down.mp4"
                                 controls
                                 autoPlay
                                 playsInline
+                                preload="auto" 
                                 className="w-full rounded-xl shadow-lg"
                             />
 
