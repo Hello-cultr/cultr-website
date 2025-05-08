@@ -21,7 +21,7 @@ export default function CultrPoster() {
 
     const [windowWidth, setWindowWidth] = useState<number>(0);
 
-    console.log(windowWidth,"windowWidth");
+    console.log(windowWidth, "windowWidth");
 
     useEffect(() => {
         // Initial set
@@ -167,7 +167,21 @@ export default function CultrPoster() {
                                 </button>
                             </div>
 
-                            <div className={`absolute  ${windowWidth === 425 ? "-top-15 right-30" :windowWidth === 375 ?"-top-15 right-25" : windowWidth === 320 ?"-top-12 right-22" :""} bg-black/70 px-2 py-3 rounded-xl sm:hidden  flex flex-row items-center  gap-3 shadow-lg z-10`}>
+                            <div
+                                //  className={`absolute  ${windowWidth === 425 ? "-top-15 right-30" :windowWidth === 375 ?"-top-15 right-25" : windowWidth === 320 ?"-top-12 right-22" :""} bg-black/70 px-2 py-3 rounded-xl sm:hidden  flex flex-row items-center  gap-3 shadow-lg z-10`}
+
+
+                                className={`absolute
+                                ${windowWidth >= 376 && windowWidth <= 425
+                                        ? "-top-15 right-30"
+                                        : windowWidth >= 321 && windowWidth <= 375
+                                            ? "-top-15 right-25"
+                                            : windowWidth <= 320
+                                                ? "-top-12 right-22"
+                                                : ""
+                                    }
+                                bg-black/70 px-2 py-3 rounded-xl sm:hidden flex flex-row items-center gap-3 shadow-lg z-10`}
+                            >
                                 <button
                                     onClick={(e) => handleSocialClick(e, "https://www.linkedin.com/in/deveshrohmetra")}
                                     className="hover:scale-110 transition-transform cursor-pointer"
