@@ -228,6 +228,7 @@ export default function CultrPoster() {
                                 src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr.mp4"
                                 controls
                                 autoPlay
+                                playsInline
                                 className="w-full rounded-xl shadow-lg"
                             />
 
