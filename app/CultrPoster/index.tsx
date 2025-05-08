@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CultrPoster() {
     const [showVideo, setShowVideo] = useState(false);
@@ -18,6 +18,26 @@ export default function CultrPoster() {
         e.stopPropagation(); // prevent background click
         window.open(url, "_blank");
     };
+
+    const [windowWidth, setWindowWidth] = useState<number>(0);
+
+    console.log(windowWidth,"windowWidth");
+
+    useEffect(() => {
+        // Initial set
+        setWindowWidth(window.innerWidth);
+
+        // Resize listener
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        // Clean up
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
 
     return (
         <div className="relative w-full h-screen overflow-hidden">
@@ -97,74 +117,120 @@ export default function CultrPoster() {
 
             {/* Video Modal */}
             {showVideo && (
-                <div className="absolute inset-0 z-30 flex items-center justify-center">
-                    {/* Video Container (relative parent) */}
-                    <div className="relative w-[100%] md:w-[80%]">
+                <>
 
-                        {/* Social Icons (stick to top-right of video) */}
-                        {/* <div className="absolute bottom-20 right-2 bg-black/70 px-2 py-3 rounded-xl flex flex-col items-center gap-3 shadow-lg z-10">
+                    <div className="absolute inset-0 z-30 flex items-center justify-center">
+
+
+                        <div className="relative w-[90%] md:w-[80%]">
+
+
+                            <div className="absolute sm:bottom-20 sm:right-2 bg-black/70 px-2 py-3 rounded-xl sm:flex sm:flex-col sm:items-center hidden gap-3 shadow-lg z-10">
+                                <button
+                                    onClick={(e) => handleSocialClick(e, "https://www.linkedin.com/in/deveshrohmetra")}
+                                    className="hover:scale-110 transition-transform cursor-pointer"
+                                >
+                                    <Image
+                                        src="/images/linkedin.png"
+                                        alt="LinkedIn"
+                                        width={28}
+                                        height={28}
+                                        sizes="(max-width: 639px) 60px,(max-width: 767px) 38px, 98px"
+                                        style={{ width: "auto", height: "auto" }}
+                                    />
+                                </button>
+                                <button
+                                    onClick={(e) => handleSocialClick(e, "https://www.instagram.com/cultr.inc")}
+                                    className="hover:scale-110 transition-transform cursor-pointer"
+                                >
+                                    <Image
+                                        src="/images/instagram.png"
+                                        alt="Instagram"
+                                        width={28}
+                                        height={28}
+                                        sizes="(max-width: 639px) 60px,(max-width: 767px) 38px, 98px"
+                                        style={{ width: "auto", height: "auto" }}
+                                    />
+                                </button>
+                                <button
+                                    onClick={(e) => handleSocialClick(e, "https://wa.me/7838064964")}
+                                    className="hover:scale-110 transition-transform cursor-pointer"
+                                >
+                                    <Image
+                                        src="/images/whatsapp.png"
+                                        alt="WhatsApp"
+                                        width={28}
+                                        height={28}
+                                        sizes="(max-width: 639px) 60px,(max-width: 767px) 38px, 98px"
+                                        style={{ width: "auto", height: "auto" }}
+                                    />
+                                </button>
+                            </div>
+
+                            <div className={`absolute  ${windowWidth === 425 ? "-top-15 right-30" :windowWidth === 375 ?"-top-15 right-25" : windowWidth === 320 ?"-top-12 right-22" :""} bg-black/70 px-2 py-3 rounded-xl sm:hidden  flex flex-row items-center  gap-3 shadow-lg z-10`}>
+                                <button
+                                    onClick={(e) => handleSocialClick(e, "https://www.linkedin.com/in/deveshrohmetra")}
+                                    className="hover:scale-110 transition-transform cursor-pointer"
+                                >
+                                    <Image
+                                        src="/images/linkedin.png"
+                                        alt="LinkedIn"
+                                        width={28}
+                                        height={28}
+                                        sizes="(max-width: 321px) 70px,(max-width: 376px) 90px,(max-width: 639px) 90px,(max-width: 767px) 38px, 98px"
+                                        style={{ width: "auto", height: "auto" }}
+                                    />
+                                </button>
+                                <button
+                                    onClick={(e) => handleSocialClick(e, "https://www.instagram.com/cultr.inc")}
+                                    className="hover:scale-110 transition-transform cursor-pointer"
+                                >
+                                    <Image
+                                        src="/images/instagram.png"
+                                        alt="Instagram"
+                                        width={28}
+                                        height={28}
+                                        sizes="(max-width: 321px) 70px,(max-width: 376px) 90px,(max-width: 639px) 90px,(max-width: 767px) 38px, 98px"
+                                        style={{ width: "auto", height: "auto" }}
+                                    />
+                                </button>
+                                <button
+                                    onClick={(e) => handleSocialClick(e, "https://wa.me/7838064964")}
+                                    className="hover:scale-110 transition-transform cursor-pointer"
+                                >
+                                    <Image
+                                        src="/images/whatsapp.png"
+                                        alt="WhatsApp"
+                                        width={28}
+                                        height={28}
+                                        sizes="(max-width: 321px) 70px,(max-width: 376px) 90px,(max-width: 639px) 90px,(max-width: 767px) 38px, 98px"
+                                        style={{ width: "auto", height: "auto" }}
+                                    />
+                                </button>
+                            </div>
+
+
+                            <video
+                                src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr.mp4"
+                                controls
+                                autoPlay
+                                className="w-full rounded-xl shadow-lg"
+                            />
+
+
+
                             <button
-                                onClick={(e) => handleSocialClick(e, "https://www.linkedin.com/in/deveshrohmetra")}
-                                className="hover:scale-110 transition-transform cursor-pointer"
+                                onClick={handleClose}
+                                className="absolute -top-4 -right-4 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-200"
+                                aria-label="Close video"
                             >
-                                <Image
-                                    src="/images/linkedin.png"
-                                    alt="LinkedIn"
-                                    width={28}
-                                    height={28}
-                                    sizes="(max-width: 639px) 20px,(max-width: 767px) 38px, 98px"
-                                    style={{ width: "auto", height: "auto" }}
-                                />
+                                ✕
                             </button>
-                            <button
-                                onClick={(e) => handleSocialClick(e, "https://www.instagram.com/cultr.inc")}
-                                className="hover:scale-110 transition-transform cursor-pointer"
-                            >
-                                <Image
-                                    src="/images/instagram.png"
-                                    alt="Instagram"
-                                    width={28}
-                                    height={28}
-                                    sizes="(max-width: 639px) 20px,(max-width: 767px) 38px, 98px"
-                                    style={{ width: "auto", height: "auto" }}
-                                />
-                            </button>
-                            <button
-                                onClick={(e) => handleSocialClick(e, "https://wa.me/7838064964")}
-                                className="hover:scale-110 transition-transform cursor-pointer"
-                            >
-                                <Image
-                                    src="/images/whatsapp.png"
-                                    alt="WhatsApp"
-                                    width={28}
-                                    height={28}
-                                    sizes="(max-width: 639px) 20px,(max-width: 767px) 38px, 98px"
-                                    style={{ width: "auto", height: "auto" }}
-                                />
-                            </button>
-                        </div> */}
-
-                        {/* Video Element */}
-
-                        <video
-                            src="https://cultr-website.s3.ap-south-1.amazonaws.com/Cultr.mp4"
-                            controls
-                            autoPlay
-                            className="w-full rounded-xl shadow-lg sm:rotate-0 rotate-90"
-                        />
-
-
-
-                        {/* Close Button */}
-                        {/* <button
-                            onClick={handleClose}
-                            className="absolute -top-4 -right-4 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-200"
-                            aria-label="Close video"
-                        >
-                            ✕
-                        </button> */}
+                        </div>
                     </div>
-                </div>
+
+
+                </>
             )}
 
         </div>
